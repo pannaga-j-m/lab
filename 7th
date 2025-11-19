@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<mpi.h>
+int main(int argc,char** argv){
+int rank,size;
+int number;
+MPI_init(&argc,&argv);
+MPI_comm_rank(MPI_COMM_WORLD,&rank);
+MPI_comm_size(MPI_COMM_WORLD,&size);
+if(rank==0){
+number=42;
+printf("process 0 broad casting number %d\n",number);
+}
+mpi_bcast(&number,1,MPI_INT,1,MPI_COMM_WORLD);
+printf("process %d reciverd number %d\n",rank,number);
+}
+mpi_finalize;
+return 0;
+}
